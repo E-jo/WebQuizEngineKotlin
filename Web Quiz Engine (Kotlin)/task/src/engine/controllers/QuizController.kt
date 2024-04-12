@@ -25,8 +25,6 @@ class QuizController {
     @Autowired
     lateinit var solvedQuizService: SolvedQuizService
 
-    val PAGE_SIZE = 10
-
     @GetMapping("/")
     fun checkGet(): ResponseEntity<*> {
         println("GET request to / received")
