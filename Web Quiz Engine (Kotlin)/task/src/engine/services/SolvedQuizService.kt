@@ -28,20 +28,19 @@ class SolvedQuizService {
     fun findAll(pageNo: Int?, pageSize: Int?, user: UserDetailsAdapter): Page<SolvedQuiz?>? {
         val paging: Pageable = PageRequest.of(
             pageNo!!,
-            pageSize!!, Sort.by("completedAt").descending()
+            pageSize!!,
+            Sort.by("completedAt").descending()
         )
 
         return solvedQuizRepository.findAll(paging)
     }
-/*
+
     fun findAllByUserName(userName: String, pageNumber: Int, pageSize: Int): Page<SolvedQuiz> {
         val pageable: Pageable = PageRequest.of(pageNumber, pageSize)
         val page: Page<SolvedQuiz?>? = solvedQuizRepository.findAllByUserName(userName, pageable)
         val content: List<SolvedQuiz> = page?.content?.mapNotNull { it } ?: emptyList()
         return PageImpl(content, pageable, page?.totalElements ?: 0)
     }
-
- */
 
     fun findAllByUserName(userName: String, pageable: Pageable?): Page<SolvedQuiz> {
         println("solvedQuizService(): pageable: $pageable")
@@ -58,3 +57,4 @@ class SolvedQuizService {
         return solvedQuizRepository.save(quiz)
     }
 }
+

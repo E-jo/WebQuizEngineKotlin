@@ -33,8 +33,7 @@ class UserService : UserDetailsService {
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
-        var user = findByUsername(username)
-        user = userRepository.findByUserName(username)
+        val user = userRepository.findByUserName(username)
             ?: throw UsernameNotFoundException("Not found")
 
         return UserDetailsAdapter(user.get())
