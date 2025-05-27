@@ -1,14 +1,10 @@
 package engine.models
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
-import kotlinx.serialization.Transient
-import org.hibernate.annotations.Fetch
-import org.hibernate.annotations.FetchMode
 
 @Entity
 data class Quiz(
@@ -37,7 +33,7 @@ data class Quiz(
         if (title != other.title) return false
         if (text != other.text) return false
         if (!options.contentEquals(other.options)) return false
-        if (answer != other.answer) return false
+        if (!answer.contentEquals(other.answer)) return false
 
         return true
     }
