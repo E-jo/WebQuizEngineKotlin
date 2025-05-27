@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @Validated
-class QuizController {
-    @Autowired
-    lateinit var quizService: QuizService
-
-    @Autowired
-    lateinit var solvedQuizService: SolvedQuizService
+class QuizController(
+    private val quizService: QuizService,
+    private val solvedQuizService: SolvedQuizService
+) {
 
     @PostMapping("/api/quizzes")
     fun createQuiz(

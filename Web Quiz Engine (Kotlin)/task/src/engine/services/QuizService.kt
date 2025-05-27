@@ -13,13 +13,10 @@ import java.time.LocalDateTime
 import java.util.*
 
 @Service
-class QuizService {
-    @Autowired
-    lateinit var quizRepository: QuizRepository
-
-    @Autowired
-    @Lazy
-    lateinit var solvedQuizService: SolvedQuizService
+class QuizService(
+    private val quizRepository: QuizRepository,
+    private val solvedQuizService: SolvedQuizService
+) {
 
     fun deleteById(id: Int?) {
         quizRepository.deleteById(id)

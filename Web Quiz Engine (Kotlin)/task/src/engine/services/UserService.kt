@@ -3,7 +3,7 @@ package engine.services
 import engine.models.User
 import engine.models.UserDetailsAdapter
 import engine.repositories.UserRepository
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.userdetails.UserDetails
@@ -14,12 +14,13 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserService : UserDetailsService {
-    @Autowired
-    lateinit var userRepository: UserRepository
+class UserService(
+    private val userRepository: UserRepository
+) : UserDetailsService {
 
-    @Autowired
-    lateinit var encoder: BCryptPasswordEncoder
+    @Bean
+    fun encoder(): BCryptPasswordEncoder =
+        BCryptPasswordEncoder()
 
     fun findAll(): List<User?>? {
         return userRepository.findAll()
@@ -66,7 +67,7 @@ class UserService : UserDetailsService {
             null,
             "ROLE_USER",
             registerRequest.email,
-            encoder.encode(registerRequest.password))
+            encoder().encode(registerRequest.password))
         )
 
         return ResponseEntity("Successfully registered", HttpStatus.OK)

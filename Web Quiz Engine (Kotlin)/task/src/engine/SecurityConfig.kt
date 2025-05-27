@@ -12,13 +12,11 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig {
-    @Autowired
-    lateinit var userService: UserService
+class SecurityConfig(
+    private val userService: UserService
+) {
 
-    @Bean
-    fun encoder(): BCryptPasswordEncoder =
-        BCryptPasswordEncoder()
+
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain =
