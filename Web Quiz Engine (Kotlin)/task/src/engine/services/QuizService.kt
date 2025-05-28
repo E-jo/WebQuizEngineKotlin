@@ -154,6 +154,7 @@ class QuizService(
                   user: UserDetailsAdapter
     ): ResponseEntity<*> {
 
+
         val quiz = findById(id)
         println(quiz.toString())
         println(userAnswer.toString())

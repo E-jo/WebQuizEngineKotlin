@@ -18,6 +18,5 @@ class UserController(
     fun registerUser(@RequestBody registerRequest: RegisterRequest): ResponseEntity<*> {
         return userService.registerUser(registerRequest)
     }
-
 }
 

@@ -104,6 +104,7 @@ class SolvedQuizService {
     }
 }
 
+
 data class SolvedQuizPageResponse(
     val totalPages: Int,
     val totalElements: Long,
